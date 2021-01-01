@@ -145,3 +145,16 @@ release:
 opam:
 	@ opam lint
 	@ opam publish -v $(DATE) $(THIS) $(ARCHIVE)
+
+# ------------------------------------------------------------------------------
+
+# Vendoring this library inside Menhir.
+
+.PHONY: vendor
+vendor:
+# Copy the library to Menhir's working directory.
+	@ make clean
+	@ make -f Makefile.vendor \
+	    THIS=pprint \
+	    CLIENTS=$(HOME)/dev/menhir \
+	    SUPERFLUOUS=".git .gitignore Makefile Makefile.vendor" \
