@@ -79,6 +79,12 @@ let some =
 let none =
   string "None"
 
+let ok =
+  string "Ok"
+
+let error =
+  string "Error"
+
 let lbracketbar =
   string "[|"
 
@@ -118,6 +124,10 @@ let option f = function
       none
   | Some x ->
       some ^^ tuple [f x]
+
+let result f g = function
+  | Ok r -> ok ^^ tuple [f r]
+  | Error e -> error ^^ tuple [g e]
 
 let list f xs =
   seq2 lbracket semi rbracket f xs

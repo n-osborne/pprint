@@ -75,6 +75,11 @@ val unit : representation
     [f]. *)
 val option : ('a -> representation) -> 'a option -> representation
 
+(** [result f g r] is a represnetation of the result [r], where the
+    representation of either the value or the error is repsectively
+    computed by [f] and [g]. *)
+val result : ('r -> representation) -> ('e -> representation) -> ('r, 'e) result -> representation
+
 (** [list f xs] is a representation of the list [xs], where the
     representation of each element is computed by the function [f].
     If the whole list fits on a single line, then it is printed on
